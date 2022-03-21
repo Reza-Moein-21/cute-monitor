@@ -11,11 +11,9 @@ import javax.persistence.Table;
 @Table
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true)
 public class DBTargetEntity extends TargetEntity {
 
-    @EqualsAndHashCode.Include
-    private Long id;
     private String functionName;
 
 }

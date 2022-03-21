@@ -2,20 +2,26 @@ package github.rezamoein21.cutemonitor.entity;
 
 import github.rezamoein21.cutemonitor.enums.TargetTypeEnum;
 import github.rezamoein21.cutemonitor.enums.converter.TargetTypeEnumConverter;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Convert;
+import javax.persistence.Inheritance;
+
+import static javax.persistence.InheritanceType.JOINED;
 
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "target_type")
+@Inheritance(strategy = JOINED)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TargetEntity {
+
+    @EqualsAndHashCode.Include
+    private Long id;
 
     private String name;
 
-    @Column(name = "target_type")
     @Convert(converter = TargetTypeEnumConverter.class)
     private TargetTypeEnum targetType;
 }
