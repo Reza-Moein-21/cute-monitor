@@ -2,6 +2,7 @@ package github.rezamoein21.cutemonitor.unit;
 
 import github.rezamoein21.cutemonitor.entity.DBTargetEntity;
 import github.rezamoein21.cutemonitor.entity.RESTTargetEntity;
+import github.rezamoein21.cutemonitor.enums.TargetTypeEnum;
 import github.rezamoein21.cutemonitor.service.TargetService;
 import github.rezamoein21.cutemonitor.service.impl.TargetServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,7 @@ public class TargetDefinitionTest {
         var targetName = "check_data_exist";
         DBTargetEntity target = this.targetService.createDBFunctionTarget(targetName, functionName);
         assertNotNull(target.getId());
+        assertEquals(TargetTypeEnum.DB_FUNCTION, target.getTargetType());
         assertEquals(targetName, target.getName());
         assertEquals(functionName, target.getFunctionName());
     }
@@ -35,6 +37,7 @@ public class TargetDefinitionTest {
         var targetName = "check-service-up";
         RESTTargetEntity target = this.targetService.createRESTTarget(targetName, endPoint);
         assertNotNull(target.getId());
+        assertEquals(TargetTypeEnum.REST, target.getTargetType());
         assertEquals(targetName, target.getName());
         assertEquals(endPoint, target.getEndPoint());
     }
