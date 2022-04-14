@@ -9,13 +9,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modules>
-        <module>api</module>
-        <module>core</module>
-        <module>db</module>
+        <module>cm-app</module>
+        <module>cm-core</module>
+        <module>cm-db</module>
     </modules>
     <groupId>gmail.rezamoeinpe</groupId>
     <artifactId>cute-monitor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>cute-monitor</name>
     <packaging>pom</packaging>
     <description>Simple monitoring application</description>
@@ -49,23 +50,18 @@
         <dependencies>
             <dependency>
                 <groupId>gmail.rezamoeinpe</groupId>
-                <artifactId>core</artifactId>
+                <artifactId>cm-db</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>gmail.rezamoeinpe</groupId>
-                <artifactId>db</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>gmail.rezamoeinpe</groupId>
-                <artifactId>api</artifactId>
+                <artifactId>cm-core</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
