@@ -13,7 +13,7 @@
         <module>core</module>
         <module>db</module>
     </modules>
-    <groupId>github.rezamoein21</groupId>
+    <groupId>gmail.rezamoeinpe</groupId>
     <artifactId>cute-monitor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cute-monitor</name>
@@ -42,17 +42,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>github.rezamoein21</groupId>
+                <groupId>gmail.rezamoeinpe</groupId>
                 <artifactId>core</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>github.rezamoein21</groupId>
+                <groupId>gmail.rezamoeinpe</groupId>
                 <artifactId>db</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>github.rezamoein21</groupId>
+                <groupId>gmail.rezamoeinpe</groupId>
                 <artifactId>api</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
