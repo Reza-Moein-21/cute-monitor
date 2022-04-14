@@ -1,4 +1,4 @@
-package github.rezamoein21.cutemonitor;
+package github.rezamoein21.cutemonitor.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
