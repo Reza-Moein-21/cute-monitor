@@ -1,4 +1,4 @@
-module gmail.rezamoeinpe.cutemonitor.db {
+open module gmail.rezamoeinpe.cutemonitor.db {
     requires static lombok;
 
     requires spring.context;
@@ -11,12 +11,11 @@ module gmail.rezamoeinpe.cutemonitor.db {
     requires spring.tx;
     requires spring.beans;
 
-    exports gmail.rezamoeinpe.cutemonitor.db.entity;
-
-    exports gmail.rezamoeinpe.cutemonitor.db.repository;
-
     exports gmail.rezamoeinpe.cutemonitor.db.constant;
-
+    exports gmail.rezamoeinpe.cutemonitor.db.entity;
+    exports gmail.rezamoeinpe.cutemonitor.db.enums;
+    exports gmail.rezamoeinpe.cutemonitor.db.repository;
     exports gmail.rezamoeinpe.cutemonitor.db;
+
 
 }
