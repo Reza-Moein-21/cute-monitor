@@ -1,4 +1,4 @@
-package gmail.rezamoeinpe.cutemonitor.api;
+package gmail.rezamoeinpe.cutemonitor.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

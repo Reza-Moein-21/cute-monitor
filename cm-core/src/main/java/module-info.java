@@ -7,4 +7,6 @@ module gmail.rezamoeinpe.cutemonitor.core {
     requires spring.boot;
     requires spring.beans;
 
+    opens gmail.rezamoeinpe.cutemonitor.core to spring.core, spring.beans, spring.context;
+
 }
