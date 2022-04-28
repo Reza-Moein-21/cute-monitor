@@ -4,19 +4,23 @@ import gmail.rezamoeinpe.cutemonitor.core.exception.JobOperationException;
 import gmail.rezamoeinpe.cutemonitor.core.model.JobModel;
 import gmail.rezamoeinpe.cutemonitor.core.service.JobOperationService;
 import gmail.rezamoeinpe.cutemonitor.core.service.provider.JobOperationServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+import gmail.rezamoeinpe.cutemonitor.core.service.provider.JobValidator;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CreateJobOperationServiceTest {
+@SpringBootTest
+@ContextConfiguration(classes = {
+        JobOperationServiceImpl.class,
+        JobValidator.class
+})
+class CreateJobOperationServiceTest {
 
-    private JobOperationService service;
-
-    @BeforeEach
-    void setUp() {
-        this.service = new JobOperationServiceImpl();
-    }
+    @Autowired
+    JobOperationService service;
 
     @Test
     void jobModelIsNull_create_shouldThrowException() {
