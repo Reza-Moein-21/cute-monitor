@@ -1,7 +1,7 @@
 package gmail.rezamoeinpe.cutemonitor.db.repository;
 
 import gmail.rezamoeinpe.cutemonitor.db.entity.JobEntity;
-import gmail.rezamoeinpe.cutemonitor.db.enums.JobStatusEnum;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.enums.JobStatusEnum;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.lang.NonNull;

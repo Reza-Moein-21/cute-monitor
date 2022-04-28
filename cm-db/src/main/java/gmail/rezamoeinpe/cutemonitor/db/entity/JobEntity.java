@@ -1,7 +1,7 @@
 package gmail.rezamoeinpe.cutemonitor.db.entity;
 
 import gmail.rezamoeinpe.cutemonitor.db.constant.EntityConstant;
-import gmail.rezamoeinpe.cutemonitor.db.enums.JobStatusEnum;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.enums.JobStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

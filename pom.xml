@@ -12,6 +12,7 @@
         <module>cm-app</module>
         <module>cm-core</module>
         <module>cm-db</module>
+        <module>cm-domain</module>
     </modules>
     <groupId>gmail.rezamoeinpe</groupId>
     <artifactId>cute-monitor</artifactId>
@@ -56,6 +57,11 @@
             <dependency>
                 <groupId>gmail.rezamoeinpe</groupId>
                 <artifactId>cm-core</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>gmail.rezamoeinpe</groupId>
+                <artifactId>cm-domain</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>

@@ -1,4 +1,4 @@
-package gmail.rezamoeinpe.cutemonitor.core.model;
+package gmail.rezamoeinpe.cutemonitor.domain._publics;
 
 import lombok.Data;
 

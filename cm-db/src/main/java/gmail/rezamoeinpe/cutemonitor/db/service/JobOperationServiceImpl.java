@@ -1,7 +1,7 @@
-package gmail.rezamoeinpe.cutemonitor.core.service.provider;
+package gmail.rezamoeinpe.cutemonitor.db.service;
 
-import gmail.rezamoeinpe.cutemonitor.core.model.JobModel;
-import gmail.rezamoeinpe.cutemonitor.core.service.JobOperationService;
+import gmail.rezamoeinpe.cutemonitor.db._publics.service.JobOperationService;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

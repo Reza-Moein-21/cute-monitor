@@ -1,11 +1,12 @@
-package cutemonitor.core.test.service.operation;
+package cutemonitor.db.test.service;
 
-import gmail.rezamoeinpe.cutemonitor.core.exception.JobOperationException;
-import gmail.rezamoeinpe.cutemonitor.core.model.CronModel;
-import gmail.rezamoeinpe.cutemonitor.core.model.JobModel;
-import gmail.rezamoeinpe.cutemonitor.core.service.JobOperationService;
-import gmail.rezamoeinpe.cutemonitor.core.service.provider.JobOperationServiceImpl;
-import gmail.rezamoeinpe.cutemonitor.core.service.provider.JobValidator;
+import gmail.rezamoeinpe.cutemonitor.db._publics.exception.JobOperationException;
+import gmail.rezamoeinpe.cutemonitor.db._publics.service.JobOperationService;
+import gmail.rezamoeinpe.cutemonitor.db.service.JobOperationServiceImpl;
+import gmail.rezamoeinpe.cutemonitor.db.service.JobValidator;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.CronModel;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import java.util.List;
 import java.util.Objects;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
@@ -63,7 +63,7 @@ class CreateJobOperationServiceTest {
 
 
         List<JobModel> jobs = service.search(validJob);
-        assertThat(jobs)
+        Assertions.assertThat(jobs)
                 .filteredOn(jobModel -> jobModel.getName().equals(validJob.getName()))
                 .filteredOn(jobModel -> Objects.nonNull(jobModel.getId()))
                 .hasSize(1);

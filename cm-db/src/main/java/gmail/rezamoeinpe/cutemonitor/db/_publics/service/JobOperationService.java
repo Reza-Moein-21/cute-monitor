@@ -1,6 +1,7 @@
-package gmail.rezamoeinpe.cutemonitor.core.service;
+package gmail.rezamoeinpe.cutemonitor.db._publics.service;
 
-import gmail.rezamoeinpe.cutemonitor.core.model.JobModel;
+
+import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
 
 import java.util.List;
 

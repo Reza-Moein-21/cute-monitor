@@ -1,4 +1,4 @@
-package gmail.rezamoeinpe.cutemonitor.db.enums;
+package gmail.rezamoeinpe.cutemonitor.domain._publics.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

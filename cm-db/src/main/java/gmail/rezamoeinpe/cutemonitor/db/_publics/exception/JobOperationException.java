@@ -1,4 +1,4 @@
-package gmail.rezamoeinpe.cutemonitor.core.exception;
+package gmail.rezamoeinpe.cutemonitor.db._publics.exception;
 
 public class JobOperationException extends RuntimeException {
     public JobOperationException(String message) {
