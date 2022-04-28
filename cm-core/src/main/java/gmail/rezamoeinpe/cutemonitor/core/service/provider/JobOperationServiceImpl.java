@@ -5,6 +5,8 @@ import gmail.rezamoeinpe.cutemonitor.core.service.JobOperationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class JobOperationServiceImpl implements JobOperationService {
@@ -13,5 +15,11 @@ public class JobOperationServiceImpl implements JobOperationService {
     @Override
     public void create(JobModel job) {
         validator.validateForCreate(job);
+        job.setId(123L);
+    }
+
+    @Override
+    public List<JobModel> search(JobModel example) {
+        return List.of(example);
     }
 }
