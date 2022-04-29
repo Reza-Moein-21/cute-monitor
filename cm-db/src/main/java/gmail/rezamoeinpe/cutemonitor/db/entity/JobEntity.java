@@ -17,7 +17,7 @@ public class JobEntity extends AuditableEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = EntityConstant.JobEntityConstant.TABLE_NAME, nullable = false)
+    @Column(name = EntityConstant.JobEntityConstant.PRIMARY_KEY_NAME, nullable = false)
     private Long id;
 
     @Column(name = "NAME")
