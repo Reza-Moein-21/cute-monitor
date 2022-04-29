@@ -1,4 +1,4 @@
-package gmail.rezamoeinpe.cutemonitor.db._publics.service;
+package gmail.rezamoeinpe.cutemonitor.db._public.service;
 
 
 import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;

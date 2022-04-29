@@ -1,6 +1,6 @@
 package gmail.rezamoeinpe.cutemonitor.db.service;
 
-import gmail.rezamoeinpe.cutemonitor.db._publics.exception.JobOperationException;
+import gmail.rezamoeinpe.cutemonitor.db._public.exception.JobOperationException;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
 import org.springframework.stereotype.Component;
 
