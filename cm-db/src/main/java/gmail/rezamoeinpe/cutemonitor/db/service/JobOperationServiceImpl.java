@@ -13,9 +13,14 @@ public class JobOperationServiceImpl implements JobOperationService {
     private final JobValidator validator;
 
     @Override
-    public void create(JobModel job) {
+    public JobModel create(JobModel job) {
         validator.validateForCreate(job);
         job.setId(123L);
+        if (job.getTemplate() != null) {
+            job.getTemplate().setId(234L);
+            job.getTemplate().setJobModel(job);
+        }
+        return job;
     }
 
     @Override

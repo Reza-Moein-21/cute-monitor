@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface JobOperationService {
 
-    void create(JobModel job);
+    JobModel create(JobModel job);
 
     List<JobModel> search(JobModel example);
 }

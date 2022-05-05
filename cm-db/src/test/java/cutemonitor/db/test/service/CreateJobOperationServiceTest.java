@@ -6,14 +6,13 @@ import gmail.rezamoeinpe.cutemonitor.db.service.JobOperationServiceImpl;
 import gmail.rezamoeinpe.cutemonitor.db.service.JobValidator;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.CronModel;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.RestJobTemplateModel;
+import gmail.rezamoeinpe.cutemonitor.domain._publics.enums.JobStatusEnum;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-
-import java.util.List;
-import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -28,7 +27,7 @@ class CreateJobOperationServiceTest {
     JobOperationService service;
 
     @Test
-    void jobModelIsNull_create_shouldThrowException() {
+    void givingNullJobModel_create_shouldThrowOperationException() {
         assertThatThrownBy(() -> this.service.create(null))
                 .isInstanceOf(JobOperationException.class)
                 .hasCauseInstanceOf(NullPointerException.class)
@@ -36,36 +35,82 @@ class CreateJobOperationServiceTest {
     }
 
     @Test
-    void jobModelRequiredFieldIsNull_create_shouldThrowException() {
+    void givingNullJobName_callCreate_shouldThrowOperationException() {
         assertThatThrownBy(() -> {
             var job = new JobModel();
             this.service.create(job);
         }).isInstanceOf(JobOperationException.class)
                 .hasCauseInstanceOf(NullPointerException.class)
                 .hasMessageContaining("job name is null");
+    }
 
+    @Test
+    void givingNullJobStatus_callCreate_shouldThrowOperationException() {
         assertThatThrownBy(() -> {
-            var job = new JobModel();
-            job.setName("job name");
+            var job = getSimpleValidJob();
+            job.setStatus(null);
+            this.service.create(job);
+        }).isInstanceOf(JobOperationException.class)
+                .hasCauseInstanceOf(NullPointerException.class)
+                .hasMessageContaining("job status is null");
+    }
+
+    @Test
+    void givingNullJobCron_callCreate_shouldThrowOperationException() {
+        assertThatThrownBy(() -> {
+            var job = getSimpleValidJob();
+            job.setCron(null);
             this.service.create(job);
         }).isInstanceOf(JobOperationException.class)
                 .hasCauseInstanceOf(NullPointerException.class)
                 .hasMessageContaining("job cron is null");
     }
 
+    @Test
+    void givingNullJobTemplate_callCreate_shouldThrowOperationException() {
+        assertThatThrownBy(() -> {
+            var job = getSimpleValidJob();
+            job.setTemplate(null);
+            this.service.create(job);
+        }).isInstanceOf(JobOperationException.class)
+                .hasCauseInstanceOf(NullPointerException.class)
+                .hasMessageContaining("job template is null");
+    }
+
 
     @Test
-    void afterCreateOneJob_create_shouldLoadOneSameCreatedJob() {
-        var validJob = new JobModel();
-        validJob.setName("Valid Job");
-        validJob.setCron(new CronModel());
-        service.create(validJob);
+    void givenASimpleJobModel_callCreate_createdJobShouldBeSame() {
+        var validJob = getSimpleValidJob();
+
+        var createdJob = service.create(validJob);
 
 
-        List<JobModel> jobs = service.search(validJob);
-        Assertions.assertThat(jobs)
-                .filteredOn(jobModel -> jobModel.getName().equals(validJob.getName()))
-                .filteredOn(jobModel -> Objects.nonNull(jobModel.getId()))
-                .hasSize(1);
+        Assertions.assertThat(createdJob)
+                .isNotNull()
+                .hasFieldOrPropertyWithValue("name", validJob.getName())
+                .hasFieldOrPropertyWithValue("status", JobStatusEnum.DISABLE)
+                .hasFieldOrPropertyWithValue("cron", CronModel.EVERY_MINUTES)
+                .hasFieldOrPropertyWithValue("template", validJob.getTemplate())
+        ;
+
+        Assertions.assertThat(createdJob.getId())
+                .isNotNull()
+                .isGreaterThan(0L);
+
+        Assertions.assertThat(createdJob.getTemplate().getId())
+                .isNotNull()
+                .isGreaterThan(0L);
+
+        Assertions.assertThat(createdJob.getTemplate().getJobModel())
+                .isNotNull()
+                .isEqualTo(createdJob);
+
+    }
+
+    private JobModel getSimpleValidJob() {
+        var job = new JobModel();
+        job.setName("Valid Job");
+        job.setTemplate(new RestJobTemplateModel());
+        return job;
     }
 }

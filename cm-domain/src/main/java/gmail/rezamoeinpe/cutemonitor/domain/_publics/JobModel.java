@@ -7,6 +7,7 @@ import lombok.Data;
 public class JobModel {
     private Long id;
     private String name;
-    private JobStatusEnum status;
-    private CronModel cron;
+    private JobStatusEnum status = JobStatusEnum.DISABLE;
+    private CronModel cron = CronModel.EVERY_MINUTES;
+    private JobTemplateModel template;
 }
