@@ -10,7 +10,33 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface JobTemplateMapper extends BaseEntityMapper<JobTemplateEntity, JobTemplateModel> {
+public interface JobTemplateMapper extends BaseEntityMapper<JobTemplateEntity, JobTemplateModel, Long> {
+
+    @Override
+    default JobTemplateEntity clone(JobTemplateEntity entity) {
+        if (entity == null) return null;
+
+        if (entity instanceof DBFunctionJobTemplateEntity)
+            return Mappers.getMapper(DBFunctionJobTemplateMapper.class).clone((DBFunctionJobTemplateEntity) entity);
+
+        if (entity instanceof RestJobTemplateEntity)
+            return Mappers.getMapper(RestJobTemplateMapper.class).clone((RestJobTemplateEntity) entity);
+
+        throw new ClassCastException("Can't cast abstract jobTemplateEntity to any valid implementation");
+    }
+
+    @Override
+    default JobTemplateModel clone(JobTemplateModel model) {
+        if (model == null) return null;
+
+        if (model instanceof DBFunctionJobTemplateModel)
+            return Mappers.getMapper(DBFunctionJobTemplateMapper.class).clone((DBFunctionJobTemplateModel) model);
+
+        if (model instanceof RestJobTemplateModel)
+            return Mappers.getMapper(RestJobTemplateMapper.class).clone((RestJobTemplateModel) model);
+
+        throw new ClassCastException("Can't cast abstract jobTemplateModel to any valid implementation");
+    }
 
     @Override
     default JobTemplateModel entityToModel(JobTemplateEntity entity) {

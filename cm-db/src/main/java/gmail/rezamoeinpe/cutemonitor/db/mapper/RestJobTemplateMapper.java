@@ -5,5 +5,5 @@ import gmail.rezamoeinpe.cutemonitor.domain._publics.RestJobTemplateModel;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface RestJobTemplateMapper extends BaseEntityMapper<RestJobTemplateEntity, RestJobTemplateModel> {
+public interface RestJobTemplateMapper extends BaseEntityMapper<RestJobTemplateEntity, RestJobTemplateModel, Long> {
 }

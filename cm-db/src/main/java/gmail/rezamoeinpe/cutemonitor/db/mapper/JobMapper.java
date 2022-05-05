@@ -6,5 +6,5 @@ import org.mapstruct.Mapper;
 
 
 @Mapper(componentModel = "spring", uses = JobTemplateMapper.class)
-public interface JobMapper extends BaseEntityMapper<JobEntity, JobModel> {
+public interface JobMapper extends BaseEntityMapper<JobEntity, JobModel, Long> {
 }

@@ -1,10 +1,14 @@
 package gmail.rezamoeinpe.cutemonitor.domain._publics;
 
 import gmail.rezamoeinpe.cutemonitor.domain._publics.enums.JobStatusEnum;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-public class JobModel {
+@Getter
+@Setter
+@ToString
+public class JobModel extends BaseModel<Long> {
     private Long id;
     private String name;
     private JobStatusEnum status = JobStatusEnum.DISABLE;

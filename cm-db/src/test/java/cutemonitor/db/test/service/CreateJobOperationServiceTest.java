@@ -1,9 +1,8 @@
 package cutemonitor.db.test.service;
 
+import gmail.rezamoeinpe.cutemonitor.db.CuteMonitorDBModule;
 import gmail.rezamoeinpe.cutemonitor.db._public.exception.JobOperationException;
 import gmail.rezamoeinpe.cutemonitor.db._public.service.JobOperationService;
-import gmail.rezamoeinpe.cutemonitor.db.service.JobOperationServiceImpl;
-import gmail.rezamoeinpe.cutemonitor.db.service.JobValidator;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.CronModel;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.RestJobTemplateModel;
@@ -14,13 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
-@ContextConfiguration(classes = {
-        JobOperationServiceImpl.class,
-        JobValidator.class
-})
+//@ComponentScan()
+//@ContextConfiguration(classes = {
+//        JobOperationServiceImpl.class,
+//        JobValidator.class,
+//        JobMapperImpl.class
+//})
+@ContextConfiguration(classes = CuteMonitorDBModule.class)
 class CreateJobOperationServiceTest {
 
     @Autowired
@@ -90,7 +93,7 @@ class CreateJobOperationServiceTest {
                 .hasFieldOrPropertyWithValue("name", validJob.getName())
                 .hasFieldOrPropertyWithValue("status", JobStatusEnum.DISABLE)
                 .hasFieldOrPropertyWithValue("cron", CronModel.EVERY_MINUTES)
-                .hasFieldOrPropertyWithValue("template", validJob.getTemplate())
+                .hasFieldOrPropertyWithValue("template", createdJob.getTemplate())
         ;
 
         Assertions.assertThat(createdJob.getId())
@@ -105,6 +108,21 @@ class CreateJobOperationServiceTest {
                 .isNotNull()
                 .isEqualTo(createdJob);
 
+    }
+
+    @Test
+    void givingSimpleJob_callCreateAndSearch_shouldExactIncludeInSearchResult() {
+        var simpleValidJob = getSimpleValidJob();
+
+        var createdJob = service.create(simpleValidJob);
+
+        var searchResult = service.search(simpleValidJob);
+        assertThat(searchResult).hasSize(0);
+
+        searchResult = service.search(createdJob);
+        assertThat(searchResult)
+                .filteredOn(jobModel -> jobModel.equals(createdJob))
+                .hasSize(1);
     }
 
     private JobModel getSimpleValidJob() {

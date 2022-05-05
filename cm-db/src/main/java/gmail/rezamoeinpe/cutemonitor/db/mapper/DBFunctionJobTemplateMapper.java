@@ -5,5 +5,5 @@ import gmail.rezamoeinpe.cutemonitor.domain._publics.DBFunctionJobTemplateModel;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface DBFunctionJobTemplateMapper extends BaseEntityMapper<DBFunctionJobTemplateEntity, DBFunctionJobTemplateModel> {
+public interface DBFunctionJobTemplateMapper extends BaseEntityMapper<DBFunctionJobTemplateEntity, DBFunctionJobTemplateModel, Long> {
 }
