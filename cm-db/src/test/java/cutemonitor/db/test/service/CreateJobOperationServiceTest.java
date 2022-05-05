@@ -11,21 +11,17 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
-//@ComponentScan()
-//@ContextConfiguration(classes = {
-//        JobOperationServiceImpl.class,
-//        JobValidator.class,
-//        JobMapperImpl.class
-//})
 @ContextConfiguration(classes = CuteMonitorDBModule.class)
 class CreateJobOperationServiceTest {
 
+    private static final PageRequest DEFAULT_PAGE_REQUEST = PageRequest.ofSize(10);
     @Autowired
     JobOperationService service;
 
@@ -116,13 +112,26 @@ class CreateJobOperationServiceTest {
 
         var createdJob = service.create(simpleValidJob);
 
-        var searchResult = service.search(simpleValidJob);
-        assertThat(searchResult).hasSize(0);
+        var searchResult = service.search(simpleValidJob, DEFAULT_PAGE_REQUEST);
+        assertThat(searchResult.getTotalElements()).isEqualTo(0);
 
-        searchResult = service.search(createdJob);
+        searchResult = service.search(createdJob, DEFAULT_PAGE_REQUEST);
         assertThat(searchResult)
                 .filteredOn(jobModel -> jobModel.equals(createdJob))
                 .hasSize(1);
+    }
+
+    @Test
+    void givingSimpleJobMultiply_callCreateAndSearch_shouldExactIncludeInSearchResult() {
+        var simpleValidJob = getSimpleValidJob();
+
+        var createdJob = service.create(simpleValidJob);
+        var createdJob2 = service.create(simpleValidJob);
+        var createdJob3 = service.create(simpleValidJob);
+
+        var searchResult = service.search(DEFAULT_PAGE_REQUEST);
+        assertThat(searchResult.getTotalElements())
+                .isEqualTo(3);
     }
 
     private JobModel getSimpleValidJob() {

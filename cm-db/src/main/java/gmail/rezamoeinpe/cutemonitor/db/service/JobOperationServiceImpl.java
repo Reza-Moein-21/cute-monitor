@@ -4,8 +4,12 @@ import gmail.rezamoeinpe.cutemonitor.db._public.service.JobOperationService;
 import gmail.rezamoeinpe.cutemonitor.db.mapper.JobMapper;
 import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,9 +28,9 @@ public class JobOperationServiceImpl implements JobOperationService {
         validator.validateForCreate(job);
 
         var newJob = mapper.clone(job);
-        newJob.setId(123L);
+        newJob.setId(123L + jobStore.size());
         if (newJob.getTemplate() != null) {
-            newJob.getTemplate().setId(234L);
+            newJob.getTemplate().setId(234L + jobStore.size());
             newJob.getTemplate().setJobModel(newJob);
         }
         jobStore.add(newJob);
@@ -34,7 +38,21 @@ public class JobOperationServiceImpl implements JobOperationService {
     }
 
     @Override
-    public List<JobModel> search(JobModel example) {
-        return jobStore.stream().filter(jobModel -> jobModel.equals(example)).collect(Collectors.toList());
+    public Page<JobModel> search(JobModel example, PageRequest pageRequest) {
+        List<JobModel> items = jobStore.stream().filter(jobModel -> jobModel.equals(example)).collect(Collectors.toList());
+
+        return toPage(items, pageRequest);
+    }
+
+    @Override
+    public Page<JobModel> search(PageRequest pageRequest) {
+        List<JobModel> items = new ArrayList<>(jobStore);
+        return toPage(items, pageRequest);
+    }
+
+    private <T> Page<T> toPage(List<T> items, PageRequest pageRequest) {
+        final int start = (int) pageRequest.getOffset();
+        final int end = Math.min((start + pageRequest.getPageSize()), items.size());
+        return new PageImpl<>(items.subList(start, end), pageRequest, items.size());
     }
 }

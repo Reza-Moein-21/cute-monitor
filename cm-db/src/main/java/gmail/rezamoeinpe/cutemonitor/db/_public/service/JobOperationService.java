@@ -2,12 +2,14 @@ package gmail.rezamoeinpe.cutemonitor.db._public.service;
 
 
 import gmail.rezamoeinpe.cutemonitor.domain._publics.JobModel;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface JobOperationService {
 
     JobModel create(JobModel job);
 
-    List<JobModel> search(JobModel example);
+    Page<JobModel> search(JobModel example, PageRequest pageRequest);
+
+    Page<JobModel> search(PageRequest pageRequest);
 }
