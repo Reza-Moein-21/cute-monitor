@@ -100,10 +100,6 @@ class CreateJobOperationServiceTest {
                 .isNotNull()
                 .isGreaterThan(0L);
 
-        Assertions.assertThat(createdJob.getTemplate().getJobModel())
-                .isNotNull()
-                .isEqualTo(createdJob);
-
     }
 
     @Test
@@ -112,6 +108,7 @@ class CreateJobOperationServiceTest {
 
         var createdJob = service.create(simpleValidJob);
 
+        simpleValidJob.setName("Another");
         var searchResult = service.search(simpleValidJob, DEFAULT_PAGE_REQUEST);
         assertThat(searchResult.getTotalElements()).isEqualTo(0);
 

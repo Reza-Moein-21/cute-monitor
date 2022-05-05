@@ -26,7 +26,7 @@ public class JobEntity extends AuditableEntity<Long> {
     @Column(name = "STATUS")
     private JobStatusEnum status;
 
-    @OneToOne(mappedBy = "job")
+    @OneToOne(mappedBy = "job", fetch = FetchType.EAGER)
     private JobTemplateEntity template;
 
 

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ToString
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = EntityConstant.JobTemplateEntityConstant.TABLE_NAME)
-public abstract class JobTemplateEntity extends AuditableEntity<Long> {
+public class JobTemplateEntity extends AuditableEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

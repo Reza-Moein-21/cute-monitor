@@ -6,7 +6,7 @@ import gmail.rezamoeinpe.cutemonitor.domain._publics.BaseModel;
 import java.io.Serializable;
 import java.util.List;
 
-public interface BaseEntityMapper<E extends BaseEntity<ID>, M extends BaseModel, ID extends Serializable> {
+public interface BaseEntityMapper<E extends BaseEntity<ID>, M extends BaseModel<ID>, ID extends Serializable> {
 
     E clone(E entity);
 

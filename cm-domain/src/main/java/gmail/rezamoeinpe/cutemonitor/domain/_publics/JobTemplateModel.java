@@ -7,9 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public abstract class JobTemplateModel extends BaseModel<Long> {
+public class JobTemplateModel extends BaseModel<Long> {
     private Long id;
 
     @ToString.Exclude
-    private JobModel jobModel;
+    private JobModel job;
 }
